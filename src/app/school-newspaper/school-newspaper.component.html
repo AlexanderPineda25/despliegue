@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h1 class="display-4 text-center mb-5 border-bottom pb-3">Ediciones del Periódico Escolar</h1>
+  
+  <!-- Botón para crear una nueva edición -->
+  <div class="text-center mb-4">
+      <button class="btn btn-primary btn-lg px-4" routerLink="/createNewspaper/new">
+          Crear nueva edición
+      </button>
+  </div>
+
+  <!-- Lista de Ediciones -->
+  <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let newspaper of newspapers; trackBy: trackById">
+          <div class="card h-100 shadow-sm border-light">
+              
+              <!-- Imagen de la portada -->
+              <img [src]="newspaper.image?.imageUrl || '/assets/defecto.png'" alt="{{ newspaper.title }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+              
+              <!-- Contenido del periódico -->
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title text-center text-primary fw-bold mb-2">{{ newspaper.title }}</h5>
+                  <h6 class="card-subtitle text-center text-muted mb-3">{{ newspaper.publicationDate | date:'longDate' }}</h6>
+                  <p class="card-text text-justify flex-grow-1">{{ newspaper.description }}</p>
+              </div>
+
+              <!-- Botones de acción -->
+              <div class="card-footer d-flex justify-content-between py-3">
+                  <button class="btn btn-outline-secondary btn-sm" routerLink="/createNewspaper/{{ newspaper.id }}">
+                      Editar
+                  </button>
+                  <button class="btn btn-outline-danger btn-sm" (click)="deleteNewspaper(newspaper.id)">
+                      Borrar
+                  </button>
+                  <button *ngIf="newspaper.file?.fileUrl" class="btn btn-outline-info btn-sm" (click)="readOnline(newspaper.file?.fileUrl)">
+                      Leer en PDF
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Mensaje cuando no hay ediciones disponibles -->
+  <div *ngIf="newspapers.length === 0" class="text-center mt-5">
+      <p class="lead">No existen ediciones del periódico disponibles.</p>
+  </div>
+</div>

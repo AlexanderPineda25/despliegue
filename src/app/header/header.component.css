@@ -1,0 +1,42 @@
+.logo-image {
+  max-width: 100px; 
+  height: auto;
+}
+
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 24px;
+  color: #333;
+}
+
+.logo-text {
+  margin-left: 10px;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.text-container {
+  text-align: center;
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}

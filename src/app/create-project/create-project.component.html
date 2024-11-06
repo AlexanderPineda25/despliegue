@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card w-75">
+    <div class="card-header">
+      <h4>Formulario Proyecto</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formProject" (ngSubmit)="edit ? updateProject() : createProject()">
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Título</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <div *ngIf="formProject.get('title')?.invalid && formProject.get('title')?.touched" class="text-danger">
+            El título es obligatorio y debe tener al menos 3 caracteres.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="5"></textarea>
+          <div *ngIf="formProject.get('description')?.invalid && formProject.get('description')?.touched"
+            class="text-danger">
+            La Descripción es obligatoria y debe ser el contenido de su proyecto.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="type" class="form-label">Tipo de Proyecto</label>
+          <select class="form-select" id="type" formControlName="type">
+            <option value="" disabled selected>Seleccionar tipo</option>
+            <option value="PEDAGOGICAL">Pedagógico</option>
+            <option value="PRODUCTIVE">Productivo</option>
+            <option value="CLASSROOM">Aula</option>
+          </select>
+          <div *ngIf="formProject.get('type')?.invalid && formProject.get('type')?.touched" class="text-danger">
+            El tipo de proyecto es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">{{ edit ? 'Cambiar imagen' : 'Seleccionar imagen' }}</label>
+          <input type="file" class="form-control" id="image"
+            (change)="edit ? changeImage($event) : onFileSelected($event)" accept="image/*">
+          <div *ngIf="formProject.get('image')?.invalid && formProject.get('image')?.touched" class="text-danger">
+            La imagen es obligatoria.
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" type="submit" [disabled]="formProject.invalid || isSaveInProgress">
+            <span *ngIf="isSaveInProgress" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

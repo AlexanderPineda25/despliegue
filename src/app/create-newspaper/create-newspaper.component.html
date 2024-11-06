@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card w-75">
+    <div class="card-header">
+      <h4>Formulario de Creación de Periódico</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formNewspaper" (ngSubmit)="edit ? updateNewspaper() : createNewspaper()">
+        
+        <div class="mb-3">
+          <label for="title" class="form-label">Título del Periódico</label>
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Ingrese el título">
+          <div *ngIf="formNewspaper.get('title')?.invalid && formNewspaper.get('title')?.touched" class="text-danger">
+              El título es obligatorio y debe tener al menos 3 caracteres.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="3" placeholder="Ingrese una breve descripción"></textarea>
+          <div *ngIf="formNewspaper.get('description')?.invalid && formNewspaper.get('description')?.touched" class="text-danger">
+              La descripción es obligatoria y debe tener al menos 10 caracteres.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">{{ edit ? 'Cambiar Imagen de Portada' : 'Seleccionar Imagen de Portada' }}</label>
+          <input type="file" class="form-control" id="image" (change)="edit ? changeImage($event) : onImageSelected($event)" accept="image/*">
+          <div *ngIf="formNewspaper.get('image')?.invalid && formNewspaper.get('image')?.touched" class="text-danger">
+            La imagen es obligatoria.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="file" class="form-label">{{ edit ? 'Cambiar Archivo PDF' : 'Seleccionar Archivo PDF' }}</label>
+          <input type="file" class="form-control" id="file" (change)="onFileSelected($event)" accept="application/pdf">
+          <div *ngIf="!selectedFile && formNewspaper.get('file')?.touched" class="text-danger">
+            El archivo PDF es obligatorio.
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-primary" type="submit" [disabled]="formNewspaper.invalid || isSaveInProgress">
+            <span *ngIf="isSaveInProgress" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Guardar Edición
+          </button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>

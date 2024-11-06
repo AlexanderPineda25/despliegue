@@ -1,0 +1,69 @@
+<div class="d-none d-md-block ball register bg-primary bg-gradient position-absolute rounded-circle"></div>
+<div class="container register__form active">
+  <div class="row vh-100 w-100 align-self-center">
+    <div class="d-none d-lg-block col-lg-6 col-xl-6 p-5">
+      <div class="row vh-100 p-5">
+        <div class="col align-self-center p-5 text-center">
+          <img src="assets/images/register.png" class="bounce" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-6 px-5">
+      <div class="row vh-100">
+        <div class="col align-self-center p-5 w-100">
+          <h3 class="fw-bolder">¡Regístrate!</h3>
+          <p class="fw-lighter fs-6">
+            ¿Ya tienes una cuenta?
+            <a routerLink="/login" class="text-primary">Inicia sesión</a>
+          </p>
+          <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre de usuario</label>
+              <input type="text"
+                     class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3"
+                     id="username" ngModel name="username" placeholder="Nombre de usuario" required>
+              <div *ngIf="registerForm.submitted && !registerForm.controls['username']?.valid" class="text-danger">
+                Nombre de usuario es requerido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email"
+                     class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3"
+                     id="email" ngModel name="email" placeholder="Correo Electrónico" required>
+              <div *ngIf="registerForm.submitted && !registerForm.controls['email']?.valid" class="text-danger">
+                El correo electrónico es requerido y debe tener un formato válido.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="d-flex position-relative">
+                <input 
+                  [type]="showPassword ? 'text' : 'password'" 
+                  class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3"
+                  id="password" ngModel name="password" placeholder="Contraseña" minlength="4" required>
+                <span 
+                  class="password__icon text-primary fs-4 fw-bold" 
+                  [ngClass]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"
+                  (click)="togglePasswordVisibility()">
+                </span>
+              </div>
+              <div *ngIf="registerForm.submitted && registerForm.controls['password']?.errors?.['required']" class="text-danger">
+                La contraseña es requerida.
+              </div>
+              <div *ngIf="registerForm.submitted && registerForm.controls['password']?.errors?.['minlength']" class="text-danger">
+                La contraseña debe tener al menos 4 caracteres.
+              </div>
+            </div>
+
+            <div class="col text-center">
+              <button type="submit" class="btn btn-outline-dark btn-lg rounded-pill mt-4 w-100">Registrarse</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

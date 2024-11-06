@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Lista de Libros</h2>
+
+  <div class="input-group mb-4" style="max-width: 600px; margin: 0 auto;">
+    <input type="text" class="form-control rounded-start" placeholder="Buscar libros por título o autor"
+      [(ngModel)]="searchQuery" (keyup.enter)="searchBooks()">
+    <button class="btn btn-primary rounded-end" (click)="searchBooks()">Buscar</button>
+  </div>
+
+  <div class="text-center mb-4">
+    <button class="btn btn-primary font-weight-bold" routerLink="/createBook/new">Crear nuevo libro</button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let book of filteredBooks.concat(googleBooks); trackBy: trackById">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header text-center">
+          <h5 class="card-title mb-1">{{ book.title }}</h5>
+          <h6 class="card-subtitle text-muted">{{ book.author }}</h6>
+        </div>
+
+        <div class="d-flex justify-content-center p-3">
+          <img [src]="book.image?.imageUrl || '/assets/defecto.png'" alt="{{ book.title }}"
+            class="card-img-top book-image" style="width: 200px; height: 250px; object-fit: cover; cursor: pointer;"
+            (click)="readOnline(book.file?.fileUrl)">
+        </div>
+
+        <div class="card-body text-center">
+          <p><strong>Fecha de Publicación:</strong> {{ book.publicationDate }}</p>
+          <p><strong>Descripción:</strong> {{ book.description | slice:0:100 }}...</p>
+        </div>
+
+        <div class="card-footer">
+          <div class="btn-group w-100" role="group" aria-label="Acciones del libro">
+            <button class="btn btn-secondary font-weight-bold" routerLink="/createBook/{{ book.id }}">Editar</button>
+            <button class="btn btn-danger font-weight-bold" (click)="deleteBook(book.id)">Borrar</button>
+            <button *ngIf="book.file?.fileUrl" class="btn btn-info font-weight-bold"
+              (click)="readOnline(book.file?.fileUrl)">Leer en línea</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="filteredBooks.length === 0 && googleBooks.length === 0" class="text-center mt-4">
+    <p>No existen libros</p>
+  </div>
+</div>
