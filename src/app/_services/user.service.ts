@@ -11,11 +11,10 @@ export class UserService {
 
   private readonly requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpclient: HttpClient) { }
 
   /**
-   * Registra un nuevo usuario en el sistema.
-   * @param registerData - Datos del usuario a registrar
+  * @param registerData - Datos del usuario a registrar
    */
   public register(registerData: any): Observable<any> {
     return this.httpclient.post(`${this.PATH_OF_API}/register`, registerData).pipe(
@@ -27,7 +26,6 @@ export class UserService {
   }
 
   /**
-   * Verifica si el usuario tiene roles que coincidan con la lista permitida.
    * @param allowedRoles - Lista de roles permitidos
    * @returns true si el usuario tiene al menos uno de los roles permitidos, false de lo contrario
    */

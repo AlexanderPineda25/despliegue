@@ -1,0 +1,19 @@
+/* src/app/components/academic-calendar/academic-calendar.component.css */
+.container {
+    max-width: 800px;
+  }
+  
+  .list-group-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+  }
+  
+  button {
+    margin-right: 10px;
+  }
+  

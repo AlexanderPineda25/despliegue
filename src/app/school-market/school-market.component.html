@@ -1,1 +1,77 @@
-<p>school-market works!</p>
+<div class="container my-5">
+  <header class="text-center mb-4">
+    <h1 tabindex="0" aria-label="Mercado Escolar Campesino">Mercado Escolar Campesino</h1>
+    <p class="lead" tabindex="0">
+      Apoya la economía local y el trabajo campesino comprando productos frescos y naturales.
+    </p>
+    <button class="btn btn-primary" routerLink="/createProduct/new" aria-label="Crear nuevo producto">
+      Crear Producto
+    </button>
+  </header>
+
+  <div id="carouselProductos" class="carousel slide mb-5" data-bs-ride="carousel" role="region" aria-label="Productos destacados">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/images/mercado1.jpg" class="d-block w-100" alt="Frutas orgánicas: Del campo a tu mesa" />
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Frutas Orgánicas</h2>
+          <p>Del campo a tu mesa</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/mercado2.jpg" class="d-block w-100" alt="Verduras frescas: Calidad y sabor incomparables" />
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Verduras Frescas</h2>
+          <p>Calidad y sabor incomparables</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/mercado3.jpg" class="d-block w-100" alt="Granos y legumbres: Variedad de productos locales" />
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Granos y Legumbres</h2>
+          <p>Variedad de productos locales</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselProductos" data-bs-slide="prev" aria-label="Anterior">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselProductos" data-bs-slide="next" aria-label="Siguiente">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="row text-center" role="list">
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let product of products; trackBy: trackById" role="listitem">
+      <div class="card h-100" role="region" [attr.aria-label]="'Producto ' + product.name">
+        <img [src]="product.image?.imageUrl" class="card-img-top" [alt]="product.name" />
+        <div class="card-body">
+          <h2 class="card-title" tabindex="0">{{ product.name }}</h2>
+          <p class="card-text" tabindex="0">{{ product.description }}</p>
+          <p class="card-text" tabindex="0"><strong>Precio: </strong>{{ product.price | currency }}</p>
+          <button class="btn btn-primary mb-2" [attr.aria-label]="'Agregar ' + product.name + ' al carrito'">
+            Agregar al Carrito
+          </button>
+          <button class="btn btn-secondary mb-2" routerLink="/createProduct/{{ product.id }}" [attr.aria-label]="'Editar ' + product.name">
+            Editar
+          </button>
+          <button class="btn btn-danger" (click)="deleteProduct(product.id)" [disabled]="isDeleteInProgress" [attr.aria-label]="'Eliminar ' + product.name">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5 text-center">
+    <h2 tabindex="0">Apoya a los Productores Locales</h2>
+    <p tabindex="0">Descubre más sobre los beneficios de apoyar la economía campesina y la producción sostenible.</p>
+    <div class="d-flex justify-content-center flex-wrap" role="navigation" aria-label="Enlaces importantes">
+      <a href="#" class="btn btn-secondary mx-2 mb-2" role="link" aria-label="Ir a Moodle">Moodle</a>
+      <a href="#" class="btn btn-secondary mx-2 mb-2" role="link" aria-label="Ir a Classroom">Classroom</a>
+      <a href="#" class="btn btn-secondary mx-2 mb-2" role="link" aria-label="Ir a Colpegasus">Colpegasus</a>
+    </div>
+  </footer>
+</div>

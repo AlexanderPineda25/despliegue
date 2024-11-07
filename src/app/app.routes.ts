@@ -10,11 +10,13 @@ import { ProjectProductiveComponent } from './project-productive/project-product
 import { SchoolMarketComponent } from './school-market/school-market.component';
 import { SchoolNewspaperComponent } from './school-newspaper/school-newspaper.component';
 import { VirtualRealityGamesComponent } from './virtual-reality-games/virtual-reality-games.component';
-import { AgendaMeetingsComponent } from './agenda-meetings/agenda-meetings.component';
+import { AgendaComponent } from './agenda/agenda.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { CreateNewspaperComponent } from './create-newspaper/create-newspaper.component';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { AcademicCalendarComponent } from './academic-calendar/academic-calendar.component';
 
 import { MisionVisionComponent } from './statics/mision-vision/mision-vision.component';
 import { SymbolsComponent } from './statics/symbols/symbols.component';
@@ -24,7 +26,7 @@ import { CoexistenceManualComponent } from './statics/coexistence-manual/coexist
 import { StudyPlanComponent } from './statics/study-plan/study-plan.component';
 import { ResolutionsComponent } from './statics/resolutions/resolutions.component';
 import { CommuniquesComponent } from './statics/communiques/communiques.component';
-import { CommunityComponent } from './statics/community/community.component';
+import { CommunityComponent } from './community/community.component';
 import { TransparencyComponent } from './statics/transparency/transparency.component';
 import { ConvocatoryComponent } from './statics/convocatory/convocatory.component';
 import { PEIComponent } from './statics/pei/pei.component';
@@ -54,7 +56,7 @@ export const routes: Routes = [
     { path: 'schoolMarket', component: SchoolMarketComponent },
     { path: 'schoolNewspaper', component: SchoolNewspaperComponent },
     { path: 'virtualRealityGames', component: VirtualRealityGamesComponent },
-    { path: 'agendaMeetings', component: AgendaMeetingsComponent },
+    { path: 'agenda', component: AgendaComponent },
     { path: 'transparency', component: TransparencyComponent },
     { path: 'convocatory', component: ConvocatoryComponent },
     { path: 'createBook/new', component: CreateBookComponent },
@@ -71,4 +73,7 @@ export const routes: Routes = [
     { path: 'schoolGovernance', component: SchoolGovernanceComponent },
     { path: 'createNewspaper/new', component: CreateNewspaperComponent },
     { path: 'createNewspaper/:id', component: CreateNewspaperComponent },
+    { path: 'createProduct/new', component: CreateProductComponent },
+    { path: 'createProduct/:id', component: CreateProductComponent },
+    { path: 'academicCalendar', component: AcademicCalendarComponent },
 ];

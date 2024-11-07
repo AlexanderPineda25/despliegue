@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <h2>{{ edit ? 'Editar Producto' : 'Crear Producto' }}</h2>
+  <form [formGroup]="formProduct" (ngSubmit)="edit ? updateProduct() : createProduct()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre del Producto</label>
+      <input type="text" id="name" class="form-control" formControlName="name"
+        [ngClass]="{ 'is-invalid': formProduct.get('name')?.invalid && formProduct.get('name')?.touched }" />
+      <div *ngIf="formProduct.get('name')?.invalid && formProduct.get('name')?.touched" class="invalid-feedback">
+        El nombre debe tener al menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea id="description" class="form-control" formControlName="description"
+        [ngClass]="{ 'is-invalid': formProduct.get('description')?.invalid && formProduct.get('description')?.touched }"></textarea>
+      <div *ngIf="formProduct.get('description')?.invalid && formProduct.get('description')?.touched"
+        class="invalid-feedback">
+        La descripción es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Precio</label>
+      <input type="number" id="price" class="form-control" formControlName="price"
+        [ngClass]="{ 'is-invalid': formProduct.get('price')?.invalid && formProduct.get('price')?.touched }" />
+      <div *ngIf="formProduct.get('price')?.invalid && formProduct.get('price')?.touched" class="invalid-feedback">
+        El precio es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Imagen del Producto</label>
+      <input type="file" id="image" class="form-control" (change)="onFileSelected($event)"
+        [ngClass]="{ 'is-invalid': !selectedFile && formProduct.get('image')?.touched }" />
+      <div *ngIf="!selectedFile && formProduct.get('image')?.touched" class="invalid-feedback">
+        La imagen es obligatoria.
+      </div>
+      <button *ngIf="edit && selectedFile" type="button" class="btn btn-secondary mt-2" (click)="changeImage($event)"
+        [disabled]="isSaveInProgress">
+        Cambiar Imagen
+      </button>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="isSaveInProgress">
+      {{ edit ? 'Actualizar Producto' : 'Crear Producto' }}
+    </button>
+    <a routerLink="/schoolMarket" class="btn btn-secondary ms-2">Cancelar</a>
+  </form>
+</div>

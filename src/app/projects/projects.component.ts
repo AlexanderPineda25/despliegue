@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent implements OnInit {
-
   projects: Project[] = [];
   projectType: string = '';
   isDeleteInProgress: boolean = false;

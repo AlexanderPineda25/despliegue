@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.casino-container {
+    max-width: 500px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Encabezado */
+  h1 {
+    font-size: 28px;
+    color: #ffc107;
+  }
+  
+  /* Tarjeta de información */
+  .card {
+    border-radius: 15px;
+  }
+  
+  .game-info {
+    background-color: #343a40;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+  }
+  
+  /* Entrada de apuesta */
+  input[type="number"] {
+    background-color: #2d2d2d;
+    color: white;
+    border: 1px solid #444;
+    text-align: center;
+  }
+  
+  /* Botones */
+  button {
+    margin-top: 10px;
+  }
+  .btn-warning {
+    font-size: 1.2rem;
+    color: #2d2d2d;
+  }
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  /* Contenedor del dado 3D */
+  .dice-3d-container {
+    perspective: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    margin-top: 20px;
+  }
+  
+  /* Estilos del dado */
+  .dice-3d {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 1s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Caras del dado */
+  .face {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: #f1c40f;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+  }
+  
+  /* Posicionamiento de cada cara del dado */
+  .front { transform: translateZ(35px); }
+  .back { transform: rotateY(180deg) translateZ(35px); }
+  .right { transform: rotateY(90deg) translateZ(35px); }
+  .left { transform: rotateY(-90deg) translateZ(35px); }
+  .top { transform: rotateX(90deg) translateZ(35px); }
+  .bottom { transform: rotateX(-90deg) translateZ(35px); }
+  
+  /* Animación de rotación del dado */
+  .dice-3d.roll-animation {
+    animation: rollDice3d 1s ease-in-out forwards;
+  }
+  
+  @keyframes rollDice3d {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(90deg) rotateY(0deg); }
+    50% { transform: rotateX(90deg) rotateY(90deg); }
+    75% { transform: rotateX(180deg) rotateY(90deg); }
+    100% { transform: rotateX(180deg) rotateY(180deg); }
+  }
+  
