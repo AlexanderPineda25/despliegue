@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,9 @@ import { catchError, tap } from 'rxjs/operators';
 export class AuthService {
   private apiUrl = 'http://localhost:9090/api';
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+  private jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   private hasToken(): boolean {
     return typeof window !== 'undefined' && !!localStorage.getItem('authToken');
@@ -22,7 +24,7 @@ export class AuthService {
       tap((response: any) => {
         if (response && response.accessToken) {
           localStorage.setItem('authToken', response.accessToken);
-          this.loggedIn.next(true); // Actualiza el estado de inicio de sesión
+          this.loggedIn.next(true);
         } else {
           console.error("No se recibió ningún token en la respuesta.");
           this.loggedIn.next(false);
@@ -37,18 +39,33 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (typeof window !== 'undefined' && localStorage) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
   }
 
   logout(): void {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('authToken');
     }
-    this.loggedIn.next(false); // Cambia el estado de autenticación
-    this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión
+    this.loggedIn.next(false);
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.loggedIn.asObservable(); // Devuelve el estado de autenticación como observable
+    return this.loggedIn.asObservable();
   }
+
+  hasRole(role: string): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken?.roles?.includes(role);
+  }
+
+  isAuthenticated(): boolean {
+    return this.loggedIn.value;
+  }
+
 }

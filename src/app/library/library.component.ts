@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { GoogleBooksService } from '../_services/google-books.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-library',
@@ -20,12 +21,15 @@ export class LibraryComponent implements OnInit {
   googleBooks: any[] = [];
   isDeleteInProgress: boolean = false;
   searchQuery: string = '';
+  isAdmin: boolean = false;
 
   constructor(private bookService: BookService,
     private googleBooksService: GoogleBooksService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
   ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ADMIN');
     this.getAllBooks();
     this.searchGoogleBooks('terror cosmico, ciencia ficcion, biologia');
   }
@@ -35,7 +39,7 @@ export class LibraryComponent implements OnInit {
   getAllBooks() {
     this.bookService.getBooks().subscribe((data) => {
       this.books = data;
-      this.filteredBooks = data; 
+      this.filteredBooks = data;
     });
   }
   searchBooks() {
@@ -69,6 +73,7 @@ export class LibraryComponent implements OnInit {
     }
   }
   deleteBook(id: number) {
+    if (!this.isAdmin) return;
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'No podrás revertir esta acción',

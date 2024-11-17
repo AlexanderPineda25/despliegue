@@ -4,6 +4,7 @@ import { ProductService } from '../_services/product.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-school-market',
@@ -15,10 +16,12 @@ import { RouterModule } from '@angular/router';
 export class SchoolMarketComponent implements OnInit {
   products: Product[] = [];
   isDeleteInProgress: boolean = false;
+  isAdmin: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ADMIN');
     this.getAllProducts();
   }
 

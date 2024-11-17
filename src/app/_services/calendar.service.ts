@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CalendarService {
 
-  private baseUrl = 'http://localhost:9090/api/calendar'; // URL del backend
+  private baseUrl = 'http://localhost:9090/api/calendar';
 
   constructor(private http: HttpClient) {}
 

@@ -4,7 +4,7 @@
     <p class="lead" tabindex="0">
       Apoya la economía local y el trabajo campesino comprando productos frescos y naturales.
     </p>
-    <button class="btn btn-primary" routerLink="/createProduct/new" aria-label="Crear nuevo producto">
+    <button *ngIf="isAdmin" class="btn btn-primary" routerLink="/createProduct/new" aria-label="Crear nuevo producto">
       Crear Producto
     </button>
   </header>
@@ -54,10 +54,10 @@
           <button class="btn btn-primary mb-2" [attr.aria-label]="'Agregar ' + product.name + ' al carrito'">
             Agregar al Carrito
           </button>
-          <button class="btn btn-secondary mb-2" routerLink="/createProduct/{{ product.id }}" [attr.aria-label]="'Editar ' + product.name">
+          <button *ngIf="isAdmin" class="btn btn-secondary mb-2" routerLink="/createProduct/{{ product.id }}" [attr.aria-label]="'Editar ' + product.name">
             Editar
           </button>
-          <button class="btn btn-danger" (click)="deleteProduct(product.id)" [disabled]="isDeleteInProgress" [attr.aria-label]="'Eliminar ' + product.name">
+          <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteProduct(product.id)" [disabled]="isDeleteInProgress" [attr.aria-label]="'Eliminar ' + product.name">
             Eliminar
           </button>
         </div>

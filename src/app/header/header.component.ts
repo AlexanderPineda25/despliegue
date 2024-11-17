@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -26,8 +25,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedIn(); // Ahora `isLoggedIn$` es un Observable
-
+    this.isLoggedIn$ = this.authService.isLoggedIn();
   }
 
   public logout() {
@@ -49,10 +47,10 @@ export class HeaderComponent implements OnInit {
   }
 
   public isAdmin(): boolean {
-    return this.userService.roleMatch(['Admin']);
+    return this.userService.roleMatch(['ADMIN']);
   }
 
   public isUser(): boolean {
-    return this.userService.roleMatch(['User']);
+    return this.userService.roleMatch(['USER']);
   }
 }

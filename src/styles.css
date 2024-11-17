@@ -104,3 +104,13 @@
     margin-top: 7rem;
   }
 }
+
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast a {
+  color: #ffeb3b !important;
+}
+

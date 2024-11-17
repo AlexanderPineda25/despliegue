@@ -154,7 +154,6 @@ export class CreateNewspaperComponent implements OnInit {
       return;
     }
   
-    // Si estamos en modo de edición y publicationDate está vacío, mantenemos el valor original
     if (this.edit && !this.formNewspaper.value.publicationDate) {
       this.formNewspaper.patchValue({ publicationDate: this.originalPublicationDate });
     }

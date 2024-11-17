@@ -28,33 +28,31 @@
     max-width: 100%;
     width: auto;
     height: auto;
-    object-fit: contain; /* Asegura que la imagen se ajuste al contenedor sin recortarse */
+    object-fit: contain;
     overflow: hidden;
 }
 
 .btn-outline-dark {
-    color: #333 !important; /* Color del texto en modo claro */
-    border-color: #333 !important; /* Color del borde en modo claro */
-    background-color: #ffffff !important; /* Fondo blanco para asegurar visibilidad en modo claro */
+    color: #333 !important; 
+    border-color: #333 !important;
+    background-color: #ffffff !important;
     transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media (prefers-color-scheme: dark) {
     .btn-outline-dark {
-        color: #fff !important; /* Color del texto en modo oscuro */
-        border-color: #fff !important; /* Color del borde en modo oscuro */
-        background-color: #333 !important; /* Fondo oscuro para asegurar visibilidad en modo oscuro */
+        color: #fff !important; 
+        border-color: #fff !important; 
+        background-color: #333 !important; 
     }
 }
 
 .btn-outline-dark:hover {
-    background-color: #007bff !important; /* Cambia el fondo a azul en hover */
-    color: #fff !important; /* Cambia el color del texto a blanco en hover */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6); /* Efecto de iluminación */
+    background-color: #007bff !important; 
+    color: #fff !important; 
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
 }
 
-
-/* Ajuste del formulario de registro en pantallas pequeñas */
 @media (max-width: 768px) {
     .register__form .col-12 {
         padding: 0 !important;
@@ -89,7 +87,6 @@
     }
 }
 
-/* Ajuste del formulario de registro en pantallas medianas */
 @media (min-width: 768px) and (max-width: 1024px) {
     .register__form .col-xl-6, .register__form .col-lg-6 {
         max-width: 100%;

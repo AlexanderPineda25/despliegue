@@ -1,7 +1,6 @@
 <div class="container my-4">
     <h2 class="text-center mb-4">Calendario Académico</h2>
   
-    <!-- Lista de eventos -->
     <div *ngFor="let event of events" class="list-group-item mb-2">
       <h5>{{ event.activity }}</h5>
       <p>{{ event.dateRange }}</p>
@@ -9,10 +8,8 @@
       <button class="btn btn-danger btn-sm" (click)="deleteEvent(event.id!)">Eliminar</button>
     </div>
   
-    <!-- Botón para agregar nuevo evento -->
     <button class="btn btn-primary my-3" (click)="addNewEvent()">Agregar Nuevo Evento</button>
   
-    <!-- Formulario para agregar/editar evento -->
     <div class="card mt-4" *ngIf="selectedEvent">
       <div class="card-body">
         <h5 class="card-title">{{ isEditing ? 'Editar Evento' : 'Nuevo Evento' }}</h5>

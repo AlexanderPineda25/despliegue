@@ -1,6 +1,5 @@
 <div class="container login__form active min-vh-100 d-flex align-items-center justify-content-center">
   <div class="row w-100">
-    <!-- Contenedor del formulario -->
     <div class="col-12 col-md-8 col-lg-6">
       <div class="p-4">
         <h3 class="fw-bold text-center">Bienvenido de vuelta!</h3>
@@ -9,12 +8,10 @@
           <a routerLink="/register" class="text-primary">Regístrate</a>
         </p>
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-          <!-- Campo de correo -->
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
             <input type="email" class="form-control shadow-sm border-0 rounded-pill p-3" id="email" ngModel name="email" placeholder="Email" required aria-required="true">
           </div>
-          <!-- Campo de contraseña -->
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <div class="d-flex position-relative">
@@ -22,14 +19,12 @@
               <button type="button" class="btn btn-link text-primary position-absolute end-0 me-3" [ngClass]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'" (click)="togglePasswordVisibility()" aria-label="Mostrar u ocultar contraseña"></button>
             </div>
           </div>
-          <!-- Botón de envío -->
           <div class="text-center">
             <button type="submit" class="btn btn-outline-dark btn-lg rounded-pill mt-4 w-100">Iniciar sesión</button>
           </div>
         </form>
       </div>
     </div>
-    <!-- Sección de imagen, visible solo en pantallas grandes -->
     <div class="d-none d-lg-block col-lg-6 text-center">
       <img src="assets/images/login.png" class="img-fluid bounce" alt="Imagen de inicio de sesión">
     </div>

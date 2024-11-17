@@ -27,7 +27,7 @@ export class AcademicCalendarComponent implements OnInit {
   }
 
   selectEvent(event: Calendar): void {
-    this.selectedEvent = { ...event }; // Cargar el evento seleccionado para editar
+    this.selectedEvent = { ...event }; 
     this.isEditing = true;
   }
 

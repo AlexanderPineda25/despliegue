@@ -27,7 +27,7 @@ export class CommunityComponent implements OnInit {
   }
 
   selectEvent(event: Event) {
-    this.selectedEvent = { ...event }; // Cargar el evento seleccionado en el formulario
+    this.selectedEvent = { ...event }; 
     this.isEditing = true;
   }
 

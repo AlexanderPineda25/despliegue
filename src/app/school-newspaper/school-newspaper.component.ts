@@ -4,6 +4,7 @@ import { Newspaper } from '../_model/newspaper.model';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-school-newspaper',
@@ -14,12 +15,14 @@ import { RouterModule } from '@angular/router';
 })
 export class SchoolNewspaperComponent implements OnInit {
 
+  isAdmin: boolean = false;
   newspapers: Newspaper[] = [];
   isDeleteInProgress: boolean = false;
 
-  constructor(private newspaperService: NewspaperService) {}
+  constructor(private newspaperService: NewspaperService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ADMIN');
     this.getAllNewspapers();
   }
 

@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-projects',
@@ -17,19 +18,19 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
   projectType: string = '';
   isDeleteInProgress: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private route: ActivatedRoute,
-    private projectService: ProjectService) { }
+    private projectService: ProjectService, private authService: AuthService) { }
 
     ngOnInit(): void {
+      this.isAdmin = this.authService.hasRole('ADMIN');
       this.route.paramMap.subscribe((params) => {
         this.projectType = params.get('type') || '';
         
         if (this.projectType) {
-          // Si `projectType` tiene un valor, carga solo los proyectos de ese tipo
           this.loadProjectsByType(this.projectType);
         } else {
-          // Si `projectType` está vacío, carga todos los proyectos
           this.getAllProjects();
         }
       });

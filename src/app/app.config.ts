@@ -14,7 +14,7 @@ export function tokenGetter() {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Registro de AuthInterceptor
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, 
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideClientHydration(),
     provideRouter(routes), {
@@ -23,8 +23,8 @@ export const appConfig: ApplicationConfig = {
         JwtModule.forRoot({
           config: {
             tokenGetter: tokenGetter,
-            allowedDomains: ['localhost:9090'], // Cambia a tu dominio
-            disallowedRoutes: ['localhost:9090'], // Rutas sin autenticación
+            allowedDomains: ['localhost:9090'], 
+            disallowedRoutes: ['localhost:9090'], 
           },
         }),
     },

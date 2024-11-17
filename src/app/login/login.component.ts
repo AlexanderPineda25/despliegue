@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           }).then(() => {
             this.router.navigate(['/']);
-            //this.router.navigateByUrl(this.returnUrl);
           });
         } else {
           Swal.fire({

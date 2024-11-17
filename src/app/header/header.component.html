@@ -58,7 +58,7 @@
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">Proyectos</a>
               <ul class="dropdown-menu">
-                
+
                 <li><a class="dropdown-item" [routerLink]="['/projectPedagogical']">Pedagógicos</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/projects', 'PRODUCTIVE']">Productivos</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/projects', 'CLASSROOM']">de Aula</a></li>
@@ -76,13 +76,13 @@
                 <li><a class="dropdown-item" routerLink="/schoolNewspaper">Periódico Escolar</a></li>
                 <li><a class="dropdown-item" routerLink="/virtualRealityGames">Juegos</a></li>
                 <li><a class="dropdown-item" routerLink="/agenda">Agendar Citas</a></li>
-                <li><a class="dropdown-item" routerLink="/academicCalendar">Calendario academico</a></li>
+                <li *ngIf="isAdmin()"><a class="dropdown-item" routerLink="/academicCalendar">Calendario academico</a></li>
               </ul>
             </li>
           </ul>
 
           <div class="btn-container d-flex gap-2">
-            <a class="btn btn-primary" routerLink="/register">Registrarse</a>
+            <a class="btn btn-primary"  *ngIf="!(isLoggedIn$ | async)" routerLink="/register">Registrarse</a>
             <a class="btn btn-outline-primary" *ngIf="!(isLoggedIn$ | async)" routerLink="/login">Iniciar sesión</a>
             <a class="btn btn-outline-danger" *ngIf="isLoggedIn$ | async" (click)="logout()">Cerrar sesión</a>
           </div>

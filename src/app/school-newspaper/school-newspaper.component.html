@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <h1 class="display-4 text-center mb-5 border-bottom pb-3">Ediciones del Periódico Escolar</h1>
 
-    <div class="text-center mb-4">
+    <div *ngIf="isAdmin" class="text-center mb-4">
         <button class="btn btn-primary btn-lg px-4" routerLink="/createNewspaper/new">
             Crear nueva edición
         </button>
@@ -21,10 +21,10 @@
                 </div>
 
                 <div class="card-footer d-flex justify-content-between py-3">
-                    <button class="btn btn-outline-secondary btn-sm" routerLink="/createNewspaper/{{ newspaper.id }}">
+                    <button *ngIf="isAdmin" class="btn btn-outline-secondary btn-sm" routerLink="/createNewspaper/{{ newspaper.id }}">
                         Editar
                     </button>
-                    <button class="btn btn-outline-danger btn-sm" (click)="deleteNewspaper(newspaper.id)">
+                    <button *ngIf="isAdmin" class="btn btn-outline-danger btn-sm" (click)="deleteNewspaper(newspaper.id)">
                         Borrar
                     </button>
                     <button *ngIf="newspaper.file?.fileUrl" class="btn btn-outline-info btn-sm"
