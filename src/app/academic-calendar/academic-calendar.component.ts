@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Calendar } from '../_model/calendar.model';
 import { CalendarService } from '../_services/calendar.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-academic-calendar',
@@ -15,10 +16,14 @@ export class AcademicCalendarComponent implements OnInit {
   events: Calendar[] = [];
   selectedEvent: Calendar | null = null;
   isEditing: boolean = false;
+  isAdmin: boolean = false;
 
-  constructor(private CalendarService: CalendarService) { }
+  constructor(private CalendarService: CalendarService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ADMIN');
     this.loadEvents();
   }
 
@@ -27,7 +32,7 @@ export class AcademicCalendarComponent implements OnInit {
   }
 
   selectEvent(event: Calendar): void {
-    this.selectedEvent = { ...event }; 
+    this.selectedEvent = { ...event };
     this.isEditing = true;
   }
 
@@ -61,4 +66,5 @@ export class AcademicCalendarComponent implements OnInit {
   deleteEvent(id: number): void {
     this.CalendarService.deleteEvent(id).subscribe(() => this.loadEvents());
   }
+
 }

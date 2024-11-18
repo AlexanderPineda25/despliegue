@@ -1,41 +1,47 @@
-<div class="container mt-4">
-  <h2 class="text-center mb-4">Lista de Libros</h2>
-  <div class="input-group mb-4" style="max-width: 600px; margin: 0 auto;">
-    <input type="text" class="form-control rounded-start" placeholder="Buscar libros por título o autor"
-      [(ngModel)]="searchQuery" (keyup.enter)="searchBooks()">
-    <button class="btn btn-primary rounded-end" (click)="searchBooks()">Buscar</button>
+<div class="container my-5">
+  <h2 class="featurette-heading display-4 fw-bold text-center mb-5">Lista de Libros</h2>
+  <div class="input-group mb-5" style="max-width: 600px; margin: 0 auto;">
+    <input type="text"
+           class="form-control rounded-start shadow-sm border-0"
+           placeholder="Buscar libros por título o autor"
+           [(ngModel)]="searchQuery"
+           (keyup.enter)="searchBooks()">
+    <button class="btn btn-primary rounded-end px-4" (click)="searchBooks()">Buscar</button>
   </div>
-  <div *ngIf="isAdmin" class="text-center mb-4">
-    <button class="btn btn-primary font-weight-bold" routerLink="/createBook/new">Crear nuevo libro</button>
+  <div *ngIf="isAdmin" class="text-center mb-5">
+    <button class="btn btn-primary btn-lg px-5 py-2 rounded-pill" routerLink="/createBook/new">Crear nuevo libro</button>
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" *ngFor="let book of filteredBooks.concat(googleBooks); trackBy: trackById">
-      <div class="card h-100 shadow-sm">
-        <div class="card-header text-center">
-          <h5 class="card-title mb-1">{{ book.title }}</h5>
-          <h6 class="card-subtitle text-muted">{{ book.author }}</h6>
+      <div class="card h-100 shadow-lg border-0">
+        <div class="card-header text-center bg-primary text-white">
+          <h5 class="fw-bold mb-1" style="font-size: 1rem;">{{ book.title }}</h5>
+          <h6 class="fw-light" style="font-size: 0.85rem;">{{ book.author }}</h6>
         </div>
         <div class="d-flex justify-content-center p-3">
-          <img [src]="book.image?.imageUrl" alt="{{ book.title }}"
-            class="card-img-top book-image" style="width: 200px; height: 250px; object-fit: cover; cursor: pointer;"
-            (click)="readOnline(book.file?.fileUrl)">
+          <img [src]="book.image?.imageUrl"
+               alt="{{ book.title }}"
+               class="card-img-top book-image rounded"
+               style="width: 180px; height: 250px; object-fit: cover; cursor: pointer;"
+               (click)="readOnline(book.file?.fileUrl)">
         </div>
         <div class="card-body text-center">
-          <p><strong>Fecha de Publicación:</strong> {{ book.publicationDate }}</p>
-          <p><strong>Descripción:</strong> {{ book.description | slice:0:100 }}...</p>
+          <p class="lead text-muted mb-2"><strong>Fecha de Publicación:</strong> {{ book.publicationDate }}</p>
+          <p class="lead text-muted" style="font-size: 0.85rem;"><strong>Descripción:</strong> {{ book.description | slice:0:100 }}...</p>
         </div>
-        <div class="card-footer">
+
+        <div class="card-footer text-center">
           <div class="btn-group w-100" role="group" aria-label="Acciones del libro">
-            <button *ngIf="isAdmin" class="btn btn-secondary font-weight-bold" routerLink="/createBook/{{ book.id }}">Editar</button>
-            <button *ngIf="isAdmin" class="btn btn-danger font-weight-bold" (click)="deleteBook(book.id)">Borrar</button>
-            <button *ngIf="book.file?.fileUrl" class="btn btn-info font-weight-bold"
-              (click)="readOnline(book.file?.fileUrl)">Leer en línea</button>
+            <button *ngIf="isAdmin" class="btn btn-secondary btn-sm rounded-pill" routerLink="/createBook/{{ book.id }}">Editar</button>
+            <button *ngIf="isAdmin" class="btn btn-danger btn-sm rounded-pill" (click)="deleteBook(book.id)">Borrar</button>
+            <button *ngIf="book.file?.fileUrl" class="btn btn-info btn-sm rounded-pill" (click)="readOnline(book.file?.fileUrl)">Leer en línea</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="filteredBooks.length === 0 && googleBooks.length === 0" class="text-center mt-4">
-    <p>No existen libros</p>
+
+  <div *ngIf="filteredBooks.length === 0 && googleBooks.length === 0" class="text-center mt-5">
+    <p class="lead text-muted">No existen libros</p>
   </div>
 </div>

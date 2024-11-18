@@ -10,7 +10,8 @@ import { ProjectProductiveComponent } from './project-productive/project-product
 import { SchoolMarketComponent } from './school-market/school-market.component';
 import { SchoolNewspaperComponent } from './school-newspaper/school-newspaper.component';
 import { VirtualRealityGamesComponent } from './virtual-reality-games/virtual-reality-games.component';
-import { AgendaComponent } from './agenda/agenda.component';
+import { AgendaListComponent } from './agenda-list/agenda-list.component';
+import { AgendaCreateComponent } from './agenda-create/agenda-create.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -40,7 +41,7 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'library', component: LibraryComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'USER'] } },
+    { path: 'library', component: LibraryComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'USER', 'STUDENT','TEACHER'] } },
     { path: 'misionVision', component: MisionVisionComponent },
     { path: 'symbols', component: SymbolsComponent },
     { path: 'principlesAndValues', component: PrinciplesAndValuesComponent },
@@ -56,7 +57,8 @@ export const routes: Routes = [
     { path: 'schoolMarket', component: SchoolMarketComponent },
     { path: 'schoolNewspaper', component: SchoolNewspaperComponent },
     { path: 'virtualRealityGames', component: VirtualRealityGamesComponent },
-    { path: 'agenda', component: AgendaComponent, canActivate: [AuthGuard], data: { roles: 'ADMIN' } },
+    { path: 'agenda', component: AgendaListComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'USER', 'STUDENT','TEACHER'] } },
+    { path: 'agenda/create', component: AgendaCreateComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN', 'USER', 'STUDENT','TEACHER'] } },
     { path: 'transparency', component: TransparencyComponent },
     { path: 'convocatory', component: ConvocatoryComponent },
     { path: 'createBook/new', component: CreateBookComponent },

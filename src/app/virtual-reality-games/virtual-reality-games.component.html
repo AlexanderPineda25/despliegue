@@ -1,22 +1,36 @@
-<div class="casino-container text-center p-4 my-5">
+<div *ngIf="!showCasino" class="text-center my-5">
+  <h1 class="text-warning mb-4">🎲 Juegos Disponibles 🎲</h1>
+  <button class="btn btn-primary mx-3" (click)="showGame()">Ver Juego de Casino</button>
+  <button class="btn btn-secondary mx-3" (click)="redirectToExternalLink()">Ir a Juego de asteroides</button>
+</div>
+
+<div *ngIf="showCasino">
+  <div class="casino-container text-center p-4 my-5">
     <h1 class="text-warning mb-4">🎲 Guayabita - Juego de Casino 🎲</h1>
-  
+
     <div class="card text-light bg-dark shadow-lg">
       <div class="card-body">
         <div class="game-info mb-4">
-          <h3>Premio Acumulado: <span class="text-success">${{ prizePool }}</span></h3>
+          <h3>Bote Acumulado: <span class="text-success">{{ prizePool }}</span></h3>
+          <h3>Tu Saldo: <span class="text-info">{{ balance }}</span></h3>
         </div>
-  
+
         <div class="player-info mb-4">
           <label for="bet" class="form-label fs-5">Tu Apuesta:</label>
-          <input type="number" class="form-control text-center" [(ngModel)]="betAmount" placeholder="Ingresa tu apuesta" min="1">
+          <input
+            type="number"
+            class="form-control text-center"
+            [(ngModel)]="betAmount"
+            placeholder="Ingresa tu apuesta"
+            min="1"
+          />
         </div>
-  
-        <button class="btn btn-warning btn-lg mb-3" (click)="playGame()">Jugar</button>
-  
+
+        <button class="btn btn-warning btn-lg mb-3" (click)="playGame()" [disabled]="balance <= 0">Jugar</button>
+
         <div class="result mt-4">
           <p class="fs-4">{{ resultMessage }}</p>
-  
+
           <div class="dice-3d-container">
             <div class="dice-3d" [class.roll-animation]="isRolling">
               <div class="face front">1</div>
@@ -28,9 +42,10 @@
             </div>
           </div>
         </div>
-  
+
         <button class="btn btn-secondary mt-4" (click)="resetGame()">Reiniciar Juego</button>
+        <button class="btn btn-danger mt-4" (click)="goBack()">Atrás</button>
       </div>
     </div>
   </div>
-  
+</div>

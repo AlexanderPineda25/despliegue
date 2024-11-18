@@ -35,12 +35,12 @@ export class CreateProjectComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-  
+
     if (id && id !== 'new') {
       this.edit = true;
       this.getProjectById(+id);
     } else {
-      this.edit = false; 
+      this.edit = false;
     }
   }
 
@@ -90,7 +90,7 @@ export class CreateProjectComponent implements OnInit {
           text: 'Proyecto guardado correctamente',
         });
         this.isSaveInProgress = false;
-        this.router.navigateByUrl('/projects');
+        this.router.navigateByUrl('/');
       },
       error: () => {
         this.isSaveInProgress = false;

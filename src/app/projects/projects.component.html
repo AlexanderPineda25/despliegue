@@ -7,16 +7,20 @@
 
   <div *ngFor="let project of projects; trackBy: trackById" class="row featurette mb-5">
     <div class="col-md-7">
-      <h2 *ngFor="let project of projects" class="featurette-heading fw-normal lh-1">
-        {{ project.title }} 
+      <!-- Título del proyecto -->
+      <h2 class="featurette-heading fw-normal lh-1">
+        {{ project.title }}
       </h2>
+      <!-- Descripción del proyecto -->
       <p class="lead">{{ project.description }}</p>
       
+      <!-- Botones de acción (solo para admin) -->
       <div *ngIf="isAdmin" class="d-flex gap-2 mt-3">
         <button class="btn btn-secondary" routerLink="/createProject/{{ project.id }}">Editar</button>
         <button class="btn btn-danger" (click)="deleteProject(project.id)">Borrar</button>
       </div>
     </div>
+    <!-- Imagen del proyecto -->
     <div class="col-md-5">
       <img 
         [src]="project.image?.imageUrl || '/assets/defecto.png'" 
@@ -24,8 +28,10 @@
         class="featurette-image img-fluid mx-auto" 
         width="500" height="500" style="object-fit: cover; border-radius: 8px;">
     </div>
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
   </div>
+
+  <!-- Mensaje si no hay proyectos -->
   <div *ngIf="projects.length === 0" class="text-center mt-4">
     <p>No existen Proyectos</p>
   </div>

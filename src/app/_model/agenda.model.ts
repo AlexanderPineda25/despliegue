@@ -1,12 +1,17 @@
 export interface Agenda {
-    id?: number;
-    teacherId: number;
-    studentId?: number;
-    parentName: string;
-    contactInfo?: string;
-    meetingDate: string;
-    startTime: string;
-    endTime: string;
-    status?: string;
-  }
-  
+  id: number;                
+  teacher: {
+    username: string;         
+    email: string;           
+  };
+  student?: {
+    username: string;         
+    email: string;           
+  };
+  parentName: string;         
+  contactInfo?: string;       
+  meetingDate: string;        
+  startTime: string;          
+  endTime: string;           
+  status: string;           
+}

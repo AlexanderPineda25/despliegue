@@ -7,22 +7,24 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './virtual-reality-games.component.html',
-  styleUrl: './virtual-reality-games.component.css'
+  styleUrls: ['./virtual-reality-games.component.css']
 })
 export class VirtualRealityGamesComponent {
-  prizePool = 0;
-  betAmount = 0;
-  resultMessage = 'Lanza el dado para comenzar...';
+  prizePool = 0; // Bote acumulado
+  betAmount = 0; // Cantidad apostada
+  balance = 1000; // Saldo inicial del jugador
+  resultMessage = '¡Bienvenido al juego de Guayabita! Ingresa tu apuesta para comenzar.';
   diceRoll: number | null = null;
   isRolling = false;
+  showCasino = false; // Controla si se muestra el juego o el menú inicial
 
   rollDice(): number {
-    return Math.floor(Math.random() * 6) + 1;
+    return Math.floor(Math.random() * 6) + 1; // Genera un número entre 1 y 6
   }
 
   playGame(): void {
-    if (this.betAmount <= 0) {
-      alert("Por favor, ingresa una apuesta válida.");
+    if (this.betAmount <= 0 || this.betAmount > this.balance) {
+      this.resultMessage = `Por favor, ingresa una apuesta válida (entre 1 y tu saldo disponible: $${this.balance}).`;
       return;
     }
 
@@ -31,20 +33,27 @@ export class VirtualRealityGamesComponent {
 
     setTimeout(() => {
       this.diceRoll = this.rollDice();
-      this.isRolling = false; 
+      this.isRolling = false;
 
       this.rotateDice(this.diceRoll);
 
       if (this.diceRoll === 1 || this.diceRoll === 2 || this.diceRoll === 3 || this.diceRoll === 4) {
-        this.resultMessage = `Perdiste $${this.betAmount}.`;
-        this.prizePool += this.betAmount;
+        this.prizePool += this.betAmount; // Suma al bote acumulado
+        this.balance -= this.betAmount; // Resta del saldo del jugador
+        this.resultMessage = `Perdiste $${this.betAmount}. Tu saldo actual es: $${this.balance}. Bote acumulado: $${this.prizePool}.`;
+
+        if (this.balance <= 0) {
+          this.resultMessage = '¡Te has quedado sin saldo! Fin del juego.';
+        }
       } else if (this.diceRoll === 5 || this.diceRoll === 6) {
-        this.resultMessage = `¡Ganaste $${this.prizePool + this.betAmount}!`;
-        this.prizePool = 0;
+        const winnings = this.prizePool + this.betAmount;
+        this.balance += winnings; // Incrementa el saldo del jugador
+        this.prizePool = 0; // Reinicia el bote acumulado
+        this.resultMessage = `¡Ganaste $${winnings}! Tu saldo actual es: $${this.balance}. Bote acumulado reiniciado.`;
       }
 
-      this.betAmount = 0;
-    }, 1000); 
+      this.betAmount = 0; // Reinicia la apuesta
+    }, 1000);
   }
 
   rotateDice(value: number | null): void {
@@ -75,10 +84,22 @@ export class VirtualRealityGamesComponent {
 
   resetGame(): void {
     this.prizePool = 0;
-    this.resultMessage = 'Lanza el dado para comenzar...';
+    this.balance = 1000;
+    this.resultMessage = '¡Bienvenido de nuevo! Ingresa tu apuesta para comenzar.';
     this.diceRoll = null;
     this.betAmount = 0;
     this.isRolling = false;
   }
 
+  showGame(): void {
+    this.showCasino = true;
+  }
+
+  redirectToExternalLink(): void {
+    window.location.href = 'https://brayanfh017.github.io/';
+  }
+
+  goBack(): void {
+    this.showCasino = false;
+  }
 }

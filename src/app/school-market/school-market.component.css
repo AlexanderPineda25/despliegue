@@ -1,0 +1,25 @@
+.carousel-item img {
+    object-fit: cover;
+    max-height: 500px; 
+  }
+  
+  .carousel-caption {
+    bottom: 20%; 
+  }
+  
+  .bg-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h2.featurette-heading {
+    font-size: 2rem; 
+    line-height: 1.5;
+  }
+  
+  p {
+    font-size: 1.2rem; 
+    margin-top: 10px;
+  }
+  

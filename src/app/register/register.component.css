@@ -11,14 +11,17 @@
     from {
         transform: translateY(0px);
     }
+
     to {
         transform: translateY(-35px);
     }
 }
+
 @-webkit-keyframes bounce {
     from {
         transform: translateY(0px);
     }
+
     to {
         transform: translateY(-35px);
     }
@@ -33,7 +36,7 @@
 }
 
 .btn-outline-dark {
-    color: #333 !important; 
+    color: #333 !important;
     border-color: #333 !important;
     background-color: #ffffff !important;
     transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
@@ -41,15 +44,15 @@
 
 @media (prefers-color-scheme: dark) {
     .btn-outline-dark {
-        color: #fff !important; 
-        border-color: #fff !important; 
-        background-color: #333 !important; 
+        color: #fff !important;
+        border-color: #fff !important;
+        background-color: #333 !important;
     }
 }
 
 .btn-outline-dark:hover {
-    background-color: #007bff !important; 
-    color: #fff !important; 
+    background-color: #007bff !important;
+    color: #fff !important;
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.6);
 }
 
@@ -58,7 +61,8 @@
         padding: 0 !important;
     }
 
-    .register__form .col-xl-6, .register__form .col-lg-6 {
+    .register__form .col-xl-6,
+    .register__form .col-lg-6 {
         max-width: 100%;
     }
 
@@ -88,7 +92,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .register__form .col-xl-6, .register__form .col-lg-6 {
+
+    .register__form .col-xl-6,
+    .register__form .col-lg-6 {
         max-width: 100%;
     }
 

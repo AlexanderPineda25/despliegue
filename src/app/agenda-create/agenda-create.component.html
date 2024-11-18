@@ -1,0 +1,100 @@
+<div class="container my-5">
+  <div class="row mb-4">
+    <div class="col-md-8 offset-md-2 text-center">
+      <h2 class="display-4 fw-bold">Crear Agenda</h2>
+      <p class="lead mt-3 text-muted">
+        Completa los campos a continuación para crear una nueva agenda.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form (ngSubmit)="createAgenda()" #agendaForm="ngForm" novalidate>
+        <div class="mb-3">
+          <label for="teacherId" class="form-label">Profesor:</label>
+          <select id="teacherId" class="form-control" [(ngModel)]="newAgenda.teacherId" name="teacherId" required
+            #teacherId="ngModel">
+            <option [value]="null" disabled selected>Seleccione un profesor</option>
+            <option *ngFor="let teacher of teachers" [ngValue]="teacher.id">
+              {{ teacher.username }}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="teacherId.invalid && teacherId.touched">
+            Seleccione un profesor.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="studentId" class="form-label">Estudiante:</label>
+          <select id="studentId" class="form-control" [(ngModel)]="newAgenda.studentId" name="studentId" required
+            #studentId="ngModel">
+            <option [value]="null" disabled selected>Seleccione un estudiante</option>
+            <option *ngFor="let student of students" [value]="student.id">
+              {{ student.username }}
+            </option>
+          </select>
+          <div class="text-danger" *ngIf="studentId.invalid && studentId.touched">
+            Seleccione un estudiante.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="parentName" class="form-label">Nombre del Padre:</label>
+          <input type="text" id="parentName" class="form-control" [(ngModel)]="newAgenda.parentName" name="parentName"
+            required #parentName="ngModel" />
+          <div class="text-danger" *ngIf="parentName.invalid && parentName.touched">
+            Este campo es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="contactInfo" class="form-label">Información de Contacto:</label>
+          <input type="text" id="contactInfo" class="form-control" [(ngModel)]="newAgenda.contactInfo"
+            name="contactInfo" required   pattern="^(\d{10}|[a-zA-Z0-9.\-_%+]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})$"
+            #contactInfo="ngModel" />
+          <div class="text-danger" *ngIf="contactInfo.invalid && contactInfo.touched">
+            Proporcione un número de 10 dígitos o un correo electrónico válido.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="meetingDate" class="form-label">Fecha de la Reunión:</label>
+          <input type="date" id="meetingDate" class="form-control" [(ngModel)]="newAgenda.meetingDate"
+            name="meetingDate" required #meetingDate="ngModel" />
+          <div class="text-danger" *ngIf="meetingDate.invalid && meetingDate.touched">
+            Este campo es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="startTime" class="form-label">Hora Inicio:</label>
+          <input type="time" id="startTime" class="form-control" [(ngModel)]="newAgenda.startTime" name="startTime"
+            required #startTime="ngModel" />
+          <div class="text-danger" *ngIf="startTime.invalid && startTime.touched">
+            Este campo es obligatorio.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="endTime" class="form-label">Hora Fin:</label>
+          <input type="time" id="endTime" class="form-control" [(ngModel)]="newAgenda.endTime" name="endTime" required
+            #endTime="ngModel" />
+          <div class="text-danger" *ngIf="endTime.invalid && endTime.touched">
+            Este campo es obligatorio.
+          </div>
+          <div class="text-danger"
+            *ngIf="newAgenda.startTime && newAgenda.endTime && newAgenda.startTime >= newAgenda.endTime">
+            La hora de inicio debe ser menor que la hora de fin.
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Crear Agenda
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

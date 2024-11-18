@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +23,12 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     public userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedIn();
+    this.isLoggedIn$ = this.authService.isLoggedIn().pipe(
+      startWith(this.authService.isAuthenticated())
+    );
   }
 
   public logout() {
@@ -41,7 +44,7 @@ export class HeaderComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout();
-        this.router.navigate(['/']); 
+        this.router.navigate(['/']);
       }
     });
   }
@@ -52,5 +55,9 @@ export class HeaderComponent implements OnInit {
 
   public isUser(): boolean {
     return this.userService.roleMatch(['USER']);
+  }
+
+  public isTeacher(): boolean {
+    return this.userService.roleMatch(['TEACHER']);
   }
 }

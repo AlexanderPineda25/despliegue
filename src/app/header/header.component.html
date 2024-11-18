@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top " aria-label="Main navbar" data-bs-auto-collapse>
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" routerLink="/">
-          <img src="assets/images/Escudo.png" alt="Logo" class="logo-image" width="50" height="50">
+          <img src="assets/images/Escudo.avif" alt="Logo" class="logo-image" width="50" height="50">
           <div class="text-container me-auto">
             <h1 class="title">Institución Educativa Rural Vanguardia</h1>
             <p class="subtitle">¡CON PASO FIRME HACIA LA EXCELENCIA PERSONAL!</p>
@@ -75,8 +75,9 @@
                 <li><a class="dropdown-item" routerLink="/community">Comunidad</a></li>
                 <li><a class="dropdown-item" routerLink="/schoolNewspaper">Periódico Escolar</a></li>
                 <li><a class="dropdown-item" routerLink="/virtualRealityGames">Juegos</a></li>
-                <li><a class="dropdown-item" routerLink="/agenda">Agendar Citas</a></li>
+                <li><a class="dropdown-item" routerLink="/agenda/create">Agendar Citas</a></li>
                 <li *ngIf="isAdmin()"><a class="dropdown-item" routerLink="/academicCalendar">Calendario academico</a></li>
+                <li *ngIf="isAdmin() || isTeacher()"><a class="dropdown-item" routerLink="/agenda">Agenda de citas</a></li>
               </ul>
             </li>
           </ul>
